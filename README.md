@@ -1,5 +1,7 @@
 # VBA-Projects
 
+This is a VBA macro I wrote to address an issue with how enrollment reports displayed one course that had multiple cross-listings.  In order for one department to know how many students were enrolled in different courses, one would have to find all the cross-listed sections and then manually add them together.  This macro would automate that process across hundreds of cross-listed courses among all disciplines and campuses.
+
 ```VBA
 Option Explicit
 
@@ -30,7 +32,7 @@ Sub CombineCrosslistedCourses()
     
     'convert copy of SSRXLST_XLST_GROUP (crosslisting code) to text so that non-crosslisted codes are not combined
     Columns("Y:Y").Select
-    Selection.NumberFormat = "@" ‘convert Xlist codes to text - $ gets lost as it is read as symbol and not text
+    Selection.NumberFormat = "@" ‘convert Xlist codes to text - $ gets lost as it is read as symbol and not text.
     
     'loop thru rows
     
@@ -62,15 +64,15 @@ Sub CombineCrosslistedCourses()
                         Cells(i, 17) = Cells(i, 17) + MaxEnroll  'combine seat capacities
                         Cells(i, 18) = Cells(i, 18) + CurrentEnroll   'combine current enrollment
                         Rows(j).Delete   'delete other crosslisted course
-                        j = j - 1   'reduce current loop counter by 1
-                        nRows = nRows - 1  'reduce row counter by 1
+                        j = j - 1   'reduce current loop counter by 1 since a course was deleted
+                        nRows = nRows - 1  'reduce row counter by 1 since a course was deleted
                         
-                     End If
-                  End If
-                End If
-            Next j
-        End If
-    Next i
+                     End If  'combining course enrollment data
+                  End If 'check course codes and subjects match
+                End If 'current cell is crosslisted
+            Next j  'pick next course to check crosslisted
+        End If 'is target course crosslisted
+    Next i 'pick next target course to combine
 
 
 
