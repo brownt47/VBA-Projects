@@ -51,7 +51,6 @@ With Selection.InlineShapes(1)
     '.Line.Weight = 0.75
     '.Line.Transparency = 0#
     '.Line.Visible = msoFalse
-    
     '.PictureFormat.Brightness = 0.5
     '.PictureFormat.Contrast = 0.5
     '.PictureFormat.ColorType = msoPictureAutomatic
